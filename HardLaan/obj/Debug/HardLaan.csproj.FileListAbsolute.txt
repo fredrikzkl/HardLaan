@@ -39,3 +39,7 @@ c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan
 c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\obj\Debug\HardLaan.csprojResolveAssemblyReference.cache
 c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\obj\Debug\HardLaan.dll
 c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\obj\Debug\HardLaan.pdb
+c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\bin\EntityFramework.dll
+c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\bin\EntityFramework.SqlServer.dll
+c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\bin\EntityFramework.xml
+c:\users\fredrik kloster\documents\visual studio 2015\Projects\HardLaan\HardLaan\bin\EntityFramework.SqlServer.xml

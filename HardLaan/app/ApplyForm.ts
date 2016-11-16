@@ -1,6 +1,14 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
+import { Http, Response } from '@angular/http';
+import {Headers} from "@angular/http";
+
+import "rxjs/add/operator/map";
+
+
+import { ApplicationVM } from "./ApplicationVM";
+
 @Component({
     selector: "my-app",
     templateUrl: "./app/ApplyForm.html"
@@ -24,7 +32,7 @@ export class ApplyForm {
 
     tempPay: number;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private _http: Http, private fb: FormBuilder) {
         this.ApplyForm = fb.group({
             userid: ["", Validators.pattern("[0-9]{11}")],
             email: ["", Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")],
@@ -35,7 +43,7 @@ export class ApplyForm {
     }
 
     ngOnInit() {
-        this.monthChoices = [6, 12, 18, 24];
+        this.monthChoices = [6, 12, 18, 24, 30, 36];
         this.showForm = true;
         this.showConfirmation = false;
     }
@@ -64,5 +72,31 @@ export class ApplyForm {
         this.showForm = true;
         this.showConfirmation = false;
     }
-    
+
+    addApplication() {
+        var newApp = new ApplicationVM();
+
+        newApp.userid = this.tempID;
+        newApp.email = this.tempEmail;
+        newApp.phone = this.tempPhone;
+        newApp.amount = this.tempAmount;
+        newApp.months = this.tempMonths;
+        newApp.pay = this.tempPay;
+
+        var body: string = JSON.stringify(newApp);
+        var headers = new Headers({ "Content-Type": "application/json" });
+
+        this._http.post("api/application", body, { headers: headers })
+            .map(returData => returData.toString())
+            .subscribe(
+            retur => {
+                this.showForm = false;
+                this.showConfirmation = false;
+            
+            },
+            error => alert(error),
+            () => console.log("ferdig post-api/kunde")
+         );
+
+    }
 }

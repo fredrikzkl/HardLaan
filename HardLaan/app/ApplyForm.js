@@ -10,8 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require("@angular/core");
 const forms_1 = require('@angular/forms');
+const http_1 = require('@angular/http');
+const http_2 = require("@angular/http");
+require("rxjs/add/operator/map");
+const ApplicationVM_1 = require("./ApplicationVM");
 let ApplyForm = class ApplyForm {
-    constructor(fb) {
+    constructor(_http, fb) {
+        this._http = _http;
         this.fb = fb;
         this.ApplyForm = fb.group({
             userid: ["", forms_1.Validators.pattern("[0-9]{11}")],
@@ -22,7 +27,7 @@ let ApplyForm = class ApplyForm {
         });
     }
     ngOnInit() {
-        this.monthChoices = [6, 12, 18, 24];
+        this.monthChoices = [6, 12, 18, 24, 30, 36];
         this.showForm = true;
         this.showConfirmation = false;
     }
@@ -47,13 +52,30 @@ let ApplyForm = class ApplyForm {
         this.showForm = true;
         this.showConfirmation = false;
     }
+    addApplication() {
+        var newApp = new ApplicationVM_1.ApplicationVM();
+        newApp.userid = this.tempID;
+        newApp.email = this.tempEmail;
+        newApp.phone = this.tempPhone;
+        newApp.amount = this.tempAmount;
+        newApp.months = this.tempMonths;
+        newApp.pay = this.tempPay;
+        var body = JSON.stringify(newApp);
+        var headers = new http_2.Headers({ "Content-Type": "application/json" });
+        this._http.post("api/application", body, { headers: headers })
+            .map(returData => returData.toString())
+            .subscribe(retur => {
+            this.showForm = false;
+            this.showConfirmation = false;
+        }, error => alert(error), () => console.log("ferdig post-api/kunde"));
+    }
 };
 ApplyForm = __decorate([
     core_1.Component({
         selector: "my-app",
         templateUrl: "./app/ApplyForm.html"
     }), 
-    __metadata('design:paramtypes', [forms_1.FormBuilder])
+    __metadata('design:paramtypes', [http_1.Http, forms_1.FormBuilder])
 ], ApplyForm);
 exports.ApplyForm = ApplyForm;
 //# sourceMappingURL=ApplyForm.js.map
