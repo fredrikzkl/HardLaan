@@ -1,0 +1,77 @@
+﻿
+<div class="col-sm-4 col-sm-offset-2" *ngIf="showForm" >
+    <div>
+        <h3>Søk om Forbrukslån</h3>
+        <form [formGroup]="ApplyForm" (ngSubmit)="onSubmit()">
+
+            <h4>Personlige Opplysninger</h4>
+            <div class="form-group">
+                <label for="userIdInput">Personnummer</label>
+                <input id="userIdInput" class="form-control" required formControlName="userid"  />
+                <p class="alert alert-warning" [hidden]="ApplyForm.controls.userid.valid || (ApplyForm.controls.userid.pristine && !submitted)">
+                    Personnummer må være 11 siffer.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="emailInput">Epost</label>
+                <input id="emailInput" class="form-control"  required formControlName="email" type="email" />
+                <p class="alert alert-warning" [hidden]="ApplyForm.controls.email.valid || (ApplyForm.controls.email.pristine && !submitted)">
+                    Email er obligatorisk.
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneInput">Mobilnummer</label>
+                <input id="phoneInput" class="form-control" required formControlName="phone" />
+                <p class="alert alert-warning" [hidden]="ApplyForm.controls.phone.valid || (ApplyForm.controls.phone.pristine && !submitted)">
+                    Telefonnr kan kun være 8-15 siffer
+                </p>
+            </div>
+
+
+            <h3>Låneinformasjon</h3>
+
+            <div class="form-group">
+                <label for="amountInput">Lånebeløp</label>
+                <input id="amountInput" type="number" class="form-control" required formControlName="amount" />
+                <p class="alert alert-warning" [hidden]="ApplyForm.controls.amount.valid || (ApplyForm.controls.amount.pristine && !submitted)">
+                    Gyldig beløp må være fyllt ut
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="monthselect">Nedbetalingstid</label>
+                <select id="monthselect" class="form-control" required formControlName="months" placeholder="Antall måneder">
+                    <option *ngFor="let m of monthChoices" [value]="m">{{m}} måneder</option>
+                </select>
+                <p class="alert alert-warning" [hidden]="ApplyForm.controls.months.valid || (ApplyForm.controls.months.pristine && !submitted)">
+                    Velg en nedbetalingstid
+                </p>
+            </div>
+
+
+
+            <div class="form-group">
+                <button type="submit" [disabled]="!ApplyForm.valid" class="btn btn-primary" >Neste</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="col-sm-4 col-sm-offset-2" *ngIf="showConfirmation">
+    <h3>Oppsummering</h3>
+     <p>Personnummer: {{tempID}}</p>
+     <p>Epost: {{tempEmail}}</p>
+     <p>Telefonnr: {{tempPhone}}</p>
+     <p>Beløp: {{tempAmount}}</p>
+     <p>Nedbetalingstid: {{tempMonths}} måneder</p>
+     <p>Rente: 0.07%</p>
+     <p>Måntlig Betaling: {{tempPay}} NOK</p>
+      
+    <button class="btn btn-default" (click)="backToForm()">Tilbake</button>
+    <button class="btn btn-default" (click)="addApplication()">Send Søknad</button>
+        
+</div>
