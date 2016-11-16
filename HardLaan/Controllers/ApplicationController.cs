@@ -8,22 +8,22 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using System.Net.Http.Formatting;
 using System.Data.Common;
-
+using HardLaan.Models;
 
 namespace HardLaan.Controllers
 {
     public class ApplicationController : ApiController
     {
-        
+        DbServices db = new DbServices();
+
         // POST api/application
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]ApplicationVM innKunde)
+        public HttpResponseMessage Post([FromBody]application newApp)
         {
 
             if (ModelState.IsValid)
             {
-                bool OK = kundeDb.lagreEnKunde(innKunde);
-                if (OK)
+                if (db.newApplication(newApp))
                 {
                     return new HttpResponseMessage()
                     {

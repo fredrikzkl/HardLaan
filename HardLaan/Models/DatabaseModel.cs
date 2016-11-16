@@ -1,31 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Linq;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Web;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.Common;
+
 namespace HardLaan.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Data.Entity.ModelConfiguration.Conventions;
-    using System.Web;
-    using System.Data.Entity.Core.EntityClient;
-    using System.Data.Common;
+
+    public class Application
+    {
+        [Key]
+        public string userid { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+
+        public int amount { get; set; }
+        public int months { get; set; }
+        public int montlypay { get; set; }
+    }
 
     public class DatabaseModel : DbContext
     {
-
-        public class Application
-        {
-            [Key]
-            public string userid { get; set; }
-            public string email { get; set; }
-            public string phone { get; set; }
-
-            public int amount { get; set; }
-            public int months { get; set; }
-            public double tempPay { get; set; }
-        }
-
-
         public DatabaseModel()
             : base("name=HardLaan")
         {
@@ -39,5 +38,6 @@ namespace HardLaan.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
+
 
 }
