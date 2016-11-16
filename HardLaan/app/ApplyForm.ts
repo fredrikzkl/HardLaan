@@ -21,6 +21,7 @@ export class ApplyForm {
 
     showForm: boolean;
     showConfirmation: boolean;
+    showSuccess: boolean;
 
     monthChoices: number[];
 
@@ -46,6 +47,7 @@ export class ApplyForm {
         this.monthChoices = [6, 12, 18, 24, 30, 36];
         this.showForm = true;
         this.showConfirmation = false;
+        this.showSuccess = false;
     }
 
     onSubmit() {
@@ -58,6 +60,7 @@ export class ApplyForm {
         this.tempAmount = this.ApplyForm.value.amount;
         this.tempMonths = this.ApplyForm.value.months;
         this.calculateRepayment();
+        
     }
 
     calculateRepayment() {
@@ -83,6 +86,7 @@ export class ApplyForm {
         newApp.months = this.tempMonths;
         newApp.pay = this.tempPay;
 
+        
         var body: string = JSON.stringify(newApp);
         var headers = new Headers({ "Content-Type": "application/json" });
 
@@ -92,6 +96,7 @@ export class ApplyForm {
             retur => {
                 this.showForm = false;
                 this.showConfirmation = false;
+                
             
             },
             error => alert(error),

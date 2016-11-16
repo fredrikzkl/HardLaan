@@ -30,6 +30,7 @@ let ApplyForm = class ApplyForm {
         this.monthChoices = [6, 12, 18, 24, 30, 36];
         this.showForm = true;
         this.showConfirmation = false;
+        this.showSuccess = false;
     }
     onSubmit() {
         this.showConfirmation = true;

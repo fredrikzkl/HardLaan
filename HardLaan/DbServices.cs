@@ -21,7 +21,7 @@ namespace HardLaan
                 phone = newApp.phone,
                 amount = newApp.amount,
                 months = newApp.months,
-                montlypay = newApp.tempPay
+                montlypay = calculateRepayment(newApp.amount, newApp.months)
             };
 
             try
@@ -34,6 +34,13 @@ namespace HardLaan
                 Console.Write("Could not add application! " + e);
                 return false;
             }
+        }
+
+        public double calculateRepayment(int G, int n)
+        {
+             var r = 0.07;
+             var y = (r * G) / (1 - Math.Pow(1 + r, -n));
+             return Math.Round(y,2);            
         }
     }
 }

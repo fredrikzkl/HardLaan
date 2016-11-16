@@ -20,7 +20,7 @@ namespace HardLaan.Models
 
         public int amount { get; set; }
         public int months { get; set; }
-        public int montlypay { get; set; }
+        public double montlypay { get; set; }
     }
 
     public class DatabaseModel : DbContext
