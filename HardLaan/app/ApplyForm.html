@@ -1,4 +1,12 @@
-﻿
+﻿<div class="col-sm-4 col-sm-offset-2" *ngIf="loading" >
+    <img src="/Content/Image/spin.svg" />
+
+</div>
+
+<div class="col-sm-4 col-sm-offset-2" *ngIf="showSuccess">
+    <h4>Succsessio</h4>
+</div>
+
 <div class="col-sm-4 col-sm-offset-2" *ngIf="showForm" >
     <div>
         <h3>Søk om Forbrukslån</h3>

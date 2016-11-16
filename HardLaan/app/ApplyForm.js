@@ -31,6 +31,7 @@ let ApplyForm = class ApplyForm {
         this.showForm = true;
         this.showConfirmation = false;
         this.showSuccess = false;
+        this.loading = false;
     }
     onSubmit() {
         this.showConfirmation = true;
@@ -63,11 +64,14 @@ let ApplyForm = class ApplyForm {
         newApp.pay = this.tempPay;
         var body = JSON.stringify(newApp);
         var headers = new http_2.Headers({ "Content-Type": "application/json" });
+        this.showForm = false;
+        this.showConfirmation = false;
+        this.loading = true;
         this._http.post("api/application", body, { headers: headers })
             .map(returData => returData.toString())
             .subscribe(retur => {
-            this.showForm = false;
-            this.showConfirmation = false;
+            this.loading = false;
+            this.showSuccess = true;
         }, error => alert(error), () => console.log("ferdig post-api/kunde"));
     }
 };

@@ -22,6 +22,7 @@ export class ApplyForm {
     showForm: boolean;
     showConfirmation: boolean;
     showSuccess: boolean;
+    loading: boolean;
 
     monthChoices: number[];
 
@@ -48,6 +49,7 @@ export class ApplyForm {
         this.showForm = true;
         this.showConfirmation = false;
         this.showSuccess = false;
+        this.loading = false;
     }
 
     onSubmit() {
@@ -90,18 +92,22 @@ export class ApplyForm {
         var body: string = JSON.stringify(newApp);
         var headers = new Headers({ "Content-Type": "application/json" });
 
+        this.showForm = false;
+        this.showConfirmation = false;
+        this.loading = true;
+
         this._http.post("api/application", body, { headers: headers })
             .map(returData => returData.toString())
             .subscribe(
             retur => {
-                this.showForm = false;
-                this.showConfirmation = false;
-                
-            
+                this.loading = false;
+                this.showSuccess = true;
             },
             error => alert(error),
             () => console.log("ferdig post-api/kunde")
-         );
+        );
+        
+        
 
     }
 }
