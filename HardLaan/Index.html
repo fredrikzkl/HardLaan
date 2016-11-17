@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="styles.css">
     <!-- 1. Load libraries -->
     <link href="Content/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="Content/Font/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+
+    <!-- Creative Imports-->
+    <link href="Content/magnific-popup.css" rel="stylesheet">
+    <link href="Content/creative.min.css" rel="stylesheet">
+
     <!-- Polyfill for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
@@ -13,14 +24,152 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
+
+    <link rel="stylesheet" href="Content/creativefred.css">
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
 </head>
 <!-- 3. Display the application -->
-<body>
-    <h1>HardLån</h1>
 
-    <my-app><img src="Content/Image/spin.svg" /></my-app>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">HardLån</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#application">Søknad</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#developer">Utvikler</a>
+                    </li>
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Oppfyll dine drømmer i dag<br /> Søk om forbrukslån</h1>
+                <hr>
+                <p>Hardbank tilbyr nå forbrukslån for våre medlemmer.</p>
+                <a href="#application" class="btn btn-primary btn-xl page-scroll">Søk nå</a>
+            </div>
+        </div>
+    </header>
+
+     <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Fleksibelt Lån</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-line-chart text-primary sr-icons"></i>
+                        <h3>Fast Rente</h3>
+                        <p class="text-muted">Hardbank tilbyr en fast rente på 0.07%</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                        <h3>Rask Responstid</h3>
+                        <p class="text-muted">Få svar på søknaden umiddelbart</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-credit-card text-primary sr-icons"></i>
+                        <h3>Beløp</h3>
+                        <p class="text-muted">Lån opptil 100.000 kr</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-heart text-primary sr-icons"></i>
+                        <h3>Omtaler</h3>
+                        <p class="text-muted">Hardlån har blitt kåret til det beste forbrukslånet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-primary" id="application">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Søknad om forbrukslån</h2>
+                    <hr class="light">
+                    <my-app><img src="Content/Image/spin.svg" /></my-app>
+
+
+
+                    <!--
+                    <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p>
+                    <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+
+    <section id="developer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Utvilker</h2>
+                    <hr class="primary">
+                    <img class="img-circle" src="Content/Image/portrait.jpg" />
+                    <p>Fredrik Kloster<br />s188078</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-github fa-3x sr-contact"></i>
+                    <p>Repository</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="mailto:fredrik_kloster@hotmail.com">fredrik_kloster@hotmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+
+    <!-- jQuery -->
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="Scripts/bootstrap.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="Scripts/scrollreveal.min.js"></script>
+    <script src="Scripts/jquery.magnific-popup.min.js"></script>
+    <!-- Theme JavaScript -->
+    <script src="Scripts//creative.min.js"></script>
+
 </body>
 </html>

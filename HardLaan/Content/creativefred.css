@@ -1,0 +1,78 @@
+﻿
+hr{
+    border-color:#3B8686;
+}
+
+.btn{
+    background-color: #3B8686;
+}
+
+.btn-primary:hover{
+   background-color: #79BD9A;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary{
+    background-color: #79BD9A;
+}
+
+.bg-primary{
+    background-color:#3B8686;
+}
+
+.navbar-default.affix .navbar-header .navbar-brand {
+    color:#3B8686;
+}
+
+default.affix .navbar-header .navbar-brand:hover {
+    color:#79BD9A;
+}
+
+default.affix .navbar-header .navbar-brand:hover {
+     color:#79BD9A;
+}
+
+.navbar-default.affix .navbar-header .navbar-brand:focus, .navbar-default.affix .navbar-header .navbar-brand:hover {
+    color:#79BD9A;
+}
+
+.navbar-default.affix .nav > li > a, .navbar-default.affix .nav > li > a:focus {
+    color:#3B8686;
+}
+
+.navbar-default .nav > li.active > a, .navbar-default .nav > li.active > a:focus {
+    color:#79BD9A!important;
+}
+
+.navbar-default.affix .nav > li > a:focus:hover, .navbar-default.affix .nav > li > a:hover {
+    color:#79BD9A!important;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    content: "\25AE";
+    font-family: FontAwesome;
+    
+     border: 3px solid #42A948; 
+}
+
+.ng-invalid:not(form)  {
+  border: 3px solid #a94442;
+}
+
+p a{
+     color:#3B8686!important;
+}
+
+.text-primary{
+    color: #0B486B;
+}
+
+input, select {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 2px!important;
+  
+}
+
+
+
+

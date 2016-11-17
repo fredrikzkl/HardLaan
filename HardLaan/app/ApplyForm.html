@@ -1,19 +1,19 @@
-﻿<div class="col-sm-4 col-sm-offset-2" *ngIf="loading" >
+﻿<div  *ngIf="loading" >
     <img src="/Content/Image/spin.svg" />
 
 </div>
 
-<div class="col-sm-4 col-sm-offset-2" *ngIf="showSuccess">
+<div *ngIf="showSuccess">
     <h4>Succsessio</h4>
 </div>
 
-<div class="col-sm-4 col-sm-offset-2" *ngIf="showForm" >
+<div class="col-lg-8 col-lg-offset-2 text-center" *ngIf="showForm" >
     <div>
         <h3>Søk om Forbrukslån</h3>
         <form [formGroup]="ApplyForm" (ngSubmit)="onSubmit()">
 
             <h4>Personlige Opplysninger</h4>
-            <div class="form-group">
+            <div class="form-group rounded">
                 <label for="userIdInput">Personnummer</label>
                 <input id="userIdInput" class="form-control" required formControlName="userid"  />
                 <p class="alert alert-warning" [hidden]="ApplyForm.controls.userid.valid || (ApplyForm.controls.userid.pristine && !submitted)">
@@ -69,7 +69,7 @@
 </div>
 
 
-<div class="col-sm-4 col-sm-offset-2" *ngIf="showConfirmation">
+<div class="col-lg-8 col-lg-offset-2 text-faded"  *ngIf="showConfirmation">
     <h3>Oppsummering</h3>
      <p>Personnummer: {{tempID}}</p>
      <p>Epost: {{tempEmail}}</p>

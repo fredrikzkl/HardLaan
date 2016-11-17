@@ -22,7 +22,7 @@ let ApplyForm = class ApplyForm {
             userid: ["", forms_1.Validators.pattern("[0-9]{11}")],
             email: ["", forms_1.Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")],
             phone: ["", forms_1.Validators.pattern("[0-9]{8,15}")],
-            amount: ["", forms_1.Validators.pattern("[0-9]{4,7}")],
+            amount: ["", forms_1.Validators.pattern("[0-9]{4,6}")],
             months: ["", forms_1.Validators.required]
         });
     }

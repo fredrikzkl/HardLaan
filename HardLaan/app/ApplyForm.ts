@@ -39,7 +39,7 @@ export class ApplyForm {
             userid: ["", Validators.pattern("[0-9]{11}")],
             email: ["", Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")],
             phone: ["", Validators.pattern("[0-9]{8,15}")],
-            amount: ["", Validators.pattern("[0-9]{4,7}")],
+            amount: ["", Validators.pattern("[0-9]{4,6}")],
             months: ["", Validators.required]
         });
     }

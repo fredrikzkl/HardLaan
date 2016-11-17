@@ -126,7 +126,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\creative.min.css" />
+    <Content Include="Content\creativefred.css" />
+    <Content Include="Content\Image\header.jpg" />
+    <Content Include="Content\Image\portrait.jpg" />
     <Content Include="Content\Image\spin.svg" />
+    <Content Include="Content\magnific-popup.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Index.html" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -137,11 +142,17 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\creative.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\scrollreveal.js" />
+    <Content Include="Scripts\scrollreveal.min.js" />
     <Content Include="styles.css" />
     <Content Include="Global.asax" />
     <Content Include="systemjs.config.js" />
@@ -168,7 +179,8 @@
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
     <Content Include="package.json" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -178,6 +190,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Font\css\" />
+    <Folder Include="Content\Font\fonts\" />
+    <Folder Include="Content\Font\less\" />
+    <Folder Include="Content\Font\scss\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
