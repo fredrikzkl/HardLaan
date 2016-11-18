@@ -47,15 +47,23 @@ default.affix .navbar-header .navbar-brand:hover {
     color:#79BD9A!important;
 }
 
+.bg-primary{
+    min-height:60em;
+}
+
 .ng-valid[required], .ng-valid.required  {
-    content: "\25AE";
-    font-family: FontAwesome;
+    /*
+     content: "\25AE";
+     font-family: FontAwesome;
     
-     border: 3px solid #42A948; 
+     border-left: 3px solid #42A948; 
+        */
 }
 
 .ng-invalid:not(form)  {
-  border: 3px solid #a94442;
+    /*
+  border-left: 3px solid #a94442;
+        */
 }
 
 p a{
@@ -73,6 +81,60 @@ input, select {
   
 }
 
+.loading{
+    margin-top:3em;
+}
+
+.alert-info{
+    font-size:75%;
+}
 
 
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa  { left:  0px;}
+.right-addon .fa { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.fa-check{
+    color:green;
+}
+
+#summary{
+    color:white;
+}
+
+.regular-btn{
+    background-color:white;
+    color:#3B8686;
+}
+
+.regular-btn:hover{
+    background-color:white;
+    color:black;
+    opacity:0.9;
+}
+
+.regular-btn:disabled{
+    background-color:white;
+    opacity:0.6;
+}
+
+.regular-btn:disabled:hover{
+    background-color:white;                                
+}
 
