@@ -34,9 +34,15 @@ let ApplyForm = class ApplyForm {
         this.loading = false;
     }
     onSubmit() {
-        this.showConfirmation = true;
-        this.showForm = false;
         this.tempID = this.ApplyForm.value.userid;
+        this.checkIfCustomerExist(this.tempID);
+        if (this.userExist = true) {
+            this.showConfirmation = true;
+            this.showForm = false;
+        }
+        else {
+            alert("Brukeren finnes allerede");
+        }
         this.tempEmail = this.ApplyForm.value.email;
         this.tempPhone = this.ApplyForm.value.phone;
         this.tempAmount = this.ApplyForm.value.amount;
@@ -53,6 +59,20 @@ let ApplyForm = class ApplyForm {
     backToForm() {
         this.showForm = true;
         this.showConfirmation = false;
+    }
+    checkIfCustomerExist(id) {
+        this._http.get("api/application/" + id)
+            .map(returData => {
+            let JsonData = returData.json();
+            return JsonData;
+        }).subscribe(JsonData => {
+            if (JsonData == null) {
+                this.userExist = false;
+            }
+            else {
+                this.userExist = true;
+            }
+        }, error => alert(error), () => console.error("ferdig get"));
     }
     addApplication() {
         var newApp = new ApplicationVM_1.ApplicationVM();
@@ -72,7 +92,7 @@ let ApplyForm = class ApplyForm {
             .subscribe(retur => {
             this.loading = false;
             this.showSuccess = true;
-        }, error => alert(error), () => console.log("ferdig post-api/kunde"));
+        }, error => alert(error), () => console.log("ferdig post"));
     }
 };
 ApplyForm = __decorate([

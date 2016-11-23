@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Http, Response } from '@angular/http';
 import {Headers} from "@angular/http";
 
+
 import "rxjs/add/operator/map";
 
 
@@ -23,6 +24,7 @@ export class ApplyForm {
     showConfirmation: boolean;
     showSuccess: boolean;
     loading: boolean;
+    userExist: boolean;
 
     monthChoices: number[];
 
@@ -43,6 +45,7 @@ export class ApplyForm {
             months: ["", Validators.required]
         });
     }
+  
 
     ngOnInit() {
         this.monthChoices = [6, 12, 18, 24, 30, 36];
@@ -53,10 +56,21 @@ export class ApplyForm {
     }
 
     onSubmit() {
-        this.showConfirmation = true;
-        this.showForm = false;
+        
 
         this.tempID = this.ApplyForm.value.userid;
+
+        this.checkIfCustomerExist(this.tempID);
+
+        if (this.userExist = true) {
+            this.showConfirmation = true;
+            this.showForm = false;
+        } else {
+            alert("Brukeren finnes allerede");
+        }
+       
+
+
         this.tempEmail = this.ApplyForm.value.email;
         this.tempPhone = this.ApplyForm.value.phone;
         this.tempAmount = this.ApplyForm.value.amount;
@@ -76,6 +90,24 @@ export class ApplyForm {
     backToForm(){
         this.showForm = true;
         this.showConfirmation = false;
+    }
+
+    checkIfCustomerExist(id: string) {
+        this._http.get("api/application/" + id)
+            .map(returData => {
+                let JsonData = returData.json();
+                return JsonData;
+            }).subscribe(
+            JsonData => {
+                if (JsonData == null) {
+                    this.userExist = false;
+                } else {
+                    this.userExist = true;
+                }
+            },
+            error => alert(error),
+            () => console.error("ferdig get")
+        );
     }
 
     addApplication() {
@@ -104,10 +136,8 @@ export class ApplyForm {
                 this.showSuccess = true;
             },
             error => alert(error),
-            () => console.log("ferdig post-api/kunde")
+            () => console.log("ferdig post")
         );
-        
-        
 
     }
 }

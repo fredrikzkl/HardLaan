@@ -1,0 +1,33 @@
+﻿    <div *ngIf="showbutton">
+       <a class="btn btn-default btn-xl sr-button black-btn" (click)="generateTabel()">Hent Liste</a>
+    </div>
+    
+
+    <div *ngIf="showlist">
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Personnummer</th>
+                    <th>Email</th>
+                    <th>Tlf</th>
+                    <th>Beløp</th>
+                    <th>Nedbetalingstid</th>
+                    <th>Måntlig Betaling</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr *ngFor="let a of allApplications">
+                    <td>{{a.userid}}</td>
+                    <td>{{a.email}}</td>
+                    <td>{{a.phone}}</td>
+                    <td>{{a.amount}}</td>
+                    <td>{{a.months}}</td>
+                    <td>{{a.pay}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="loading"><img class="loading" src="Content/Image/spin.svg" /></div>
+        <button class='btn btn-primary black-btn' (click)='closeTabel()'>Lukk</button>
+        <button class='btn btn-primary black-btn' (click)='getAllApplications()'>Refresh</button>
+    </div>

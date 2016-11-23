@@ -8,6 +8,7 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppComponent }   from './app.component';
 import { ApplyForm } from './ApplyForm';
+import { applist } from './applist.component';
 
 @NgModule({
 
@@ -18,8 +19,8 @@ import { ApplyForm } from './ApplyForm';
         JsonpModule
     ],
 
-    declarations: [ApplyForm],
-    bootstrap: [ApplyForm]
+    declarations: [ApplyForm, applist],
+    bootstrap: [ApplyForm, applist]
 
 })
 export class AppModule { }

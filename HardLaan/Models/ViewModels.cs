@@ -14,7 +14,7 @@ namespace HardLaan.Models
 
         public int amount { get; set; }
         public int months { get; set; }
-        public int tempPay { get; set; }
+        public double pay { get; set; }
 
     }
 }

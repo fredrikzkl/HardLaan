@@ -121,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\AppList.html" />
     <Content Include="app\ApplyForm.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -199,6 +200,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\applist.component.ts" />
     <TypeScriptCompile Include="app\ApplyForm.ts" />
     <TypeScriptCompile Include="app\ApplicationVM.ts" />
     <TypeScriptCompile Include="app\main.ts" />

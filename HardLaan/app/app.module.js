@@ -13,6 +13,7 @@ const platform_browser_1 = require('@angular/platform-browser');
 const http_1 = require('@angular/http');
 const forms_1 = require('@angular/forms');
 const ApplyForm_1 = require('./ApplyForm');
+const applist_component_1 = require('./applist.component');
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,8 +24,8 @@ AppModule = __decorate([
             http_1.HttpModule,
             http_1.JsonpModule
         ],
-        declarations: [ApplyForm_1.ApplyForm],
-        bootstrap: [ApplyForm_1.ApplyForm]
+        declarations: [ApplyForm_1.ApplyForm, applist_component_1.applist],
+        bootstrap: [ApplyForm_1.ApplyForm, applist_component_1.applist]
     }), 
     __metadata('design:paramtypes', [])
 ], AppModule);

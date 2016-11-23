@@ -35,9 +35,41 @@ namespace HardLaan.Controllers
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.BadRequest,
-                Content = new StringContent("Kunne ikke sette inn kunden i DB")
+                Content = new StringContent("Kunne ikke lege til ny søknad")
             };
         }
+
+        [HttpGet]
+        public HttpResponseMessage Get(string id) // Henter en spesifik
+        {
+            Application app = db.getApplication(id);
+
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(app);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
+
+        [HttpGet]
+        public HttpResponseMessage Get() //Henter ut alle
+        {
+            List<application> applicationList = db.getAllApplications();
+
+            var Json = new JavaScriptSerializer();
+            string JsonString = Json.Serialize(applicationList);
+
+            return new HttpResponseMessage()
+            {
+                Content = new StringContent(JsonString, Encoding.UTF8, "application/json"),
+                StatusCode = HttpStatusCode.OK
+            };
+        }
+
 
     }
 }
