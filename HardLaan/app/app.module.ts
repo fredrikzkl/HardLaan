@@ -17,6 +17,8 @@ import { applist } from './applist.component';
         ReactiveFormsModule,
         HttpModule,
         JsonpModule
+    
+        
     ],
 
     declarations: [ApplyForm, applist],

@@ -11,7 +11,7 @@
     <div class="call-to-action">
         <form [formGroup]="ApplyForm" (ngSubmit)="onSubmit()">
 
-            <h4 id="testface">Personlige Opplysninger</h4>
+            <h4>Personlige Opplysninger</h4>
             <div class="form-group">
                 <label for="userIdInput">Personnummer</label>
                 <div class="inner-addon right-addon">
@@ -48,29 +48,19 @@
 
             <h4>Låneinformasjon</h4>
 
-            <div class="form-group">
-                <label for="amountInput">Lånebeløp</label>
-                <div class="inner-addon right-addon">
-                    <span [hidden]="!ApplyForm.controls.amount.valid"><i class="fa fa-check"></i></span>
-                    <input id="amountInput" class="form-control" required formControlName="amount" />
-                </div>
-                <p class="alert alert-info" [hidden]="ApplyForm.controls.amount.valid || (ApplyForm.controls.amount.pristine && !submitted)">
-                    Gyldig beløp må være fyllt ut
-                </p>
-            </div>
+            
+           
+                <p>Lånebeløp</p>
+                <input id="amount-slider" data-slider-id='ex1Slider' type="number" data-slider-min="5000" data-slider-max="100000" data-slider-step="5000" data-slider-value="50000"/>
+            
 
-            <div class="form-group">
-                <label for="monthselect">Nedbetalingstid</label>
-                <select id="monthselect" class="form-control" required formControlName="months" placeholder="Antall måneder">
-                    <option *ngFor="let m of monthChoices" [value]="m">{{m}} måneder</option>
-                </select>
-                <p class="alert alert-info" [hidden]="ApplyForm.controls.months.valid || (ApplyForm.controls.months.pristine && !submitted)">
-                    Velg en nedbetalingstid
-                </p>
-            </div>
+            
+                <p>Nedbetalingstid</p>
+                <input id="month-slider"  data-slider-id='ex1Slider' type="number" data-slider-min="6" data-slider-max="36" data-slider-step="1" data-slider-value="18" />
+           
 
-
-            <input id="amountSider" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" />
+            <h4>Lånekalkulator</h4>
+            <p ><span id="borrowcalculator"></span><span id="borrow-info"></span></p>
            
 
 

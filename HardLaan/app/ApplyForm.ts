@@ -44,9 +44,7 @@ export class ApplyForm implements AfterViewInit{
         this.ApplyForm = fb.group({
             userid: ["", Validators.pattern("[0-9]{11}")],
             email: ["", Validators.pattern("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")],
-            phone: ["", Validators.pattern("[0-9]{8,15}")],
-            amount: ["", Validators.pattern("[0-9]{4,6}")],
-            months: ["", Validators.required]
+            phone: ["", Validators.pattern("[0-9]{8,15}")]
         });
     }
   
@@ -57,22 +55,62 @@ export class ApplyForm implements AfterViewInit{
         this.showConfirmation = false;
         this.showSuccess = false;
         this.loading = false;
+        this.tempAmount = 0;
+
+        
     }
 
     
     ngAfterViewInit() {
          
-        jQuery('#amountSlider').slider({
+        jQuery('#amount-slider').slider({
             formatter: function (value) {
                 return 'NOK: ' + value;
             }
         });
-        
 
+        jQuery('#month-slider').slider({
+            formatter: function (value) {
+                return 'Måneder: ' + value;
+            }
+        });
+
+        // = $('#amount-slider').data("slider-value");
+
+        var amount = 0;
+        jQuery("#amount-slider").on("slide", function (slideEvt) {
+            jQuery('#testface').text(slideEvt.value);
+            amount = slideEvt.value;
+            calculate();
+        });
+
+        var month = 0;
+        jQuery("#month-slider").on("slide", function (slideEvt) {
+            jQuery('#testface').text(slideEvt.value);
+            month = slideEvt.value;
+            calculate();
+        });
+
+
+        function calculate() {
+            if (amount == 0 || month == 0) return;
+            var r = 0.07;
+            var G = amount;
+            var n = month;
+            var y = (r * G) / (1 - Math.pow(1 + r, -n));
+            jQuery('#borrowcalculator').text(Math.round(y));
+            $('#borrow-info').text(" kr/mnd");
+
+        }
+      
     }
 
     onSubmit() {
-        
+
+        this.tempEmail = this.ApplyForm.value.email;
+        this.tempPhone = this.ApplyForm.value.phone;
+        this.tempAmount = jQuery('#amount-slider').val();
+        this.tempMonths = jQuery('#month-slider').val();;
 
         this.tempID = this.ApplyForm.value.userid;
 
@@ -87,10 +125,7 @@ export class ApplyForm implements AfterViewInit{
        
 
 
-        this.tempEmail = this.ApplyForm.value.email;
-        this.tempPhone = this.ApplyForm.value.phone;
-        this.tempAmount = this.ApplyForm.value.amount;
-        this.tempMonths = this.ApplyForm.value.months;
+     
         this.calculateRepayment();
         
     }
@@ -102,6 +137,8 @@ export class ApplyForm implements AfterViewInit{
         var y = (r * G) / (1 - Math.pow(1 + r, -n)); 
         this.tempPay = Math.round(y);
     }
+
+   
 
     backToForm(){
         this.showForm = true;
