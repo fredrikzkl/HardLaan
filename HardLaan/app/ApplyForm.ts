@@ -1,4 +1,6 @@
-﻿import { Component, OnInit } from "@angular/core";
+﻿
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import { Http, Response } from '@angular/http';
@@ -7,8 +9,10 @@ import {Headers} from "@angular/http";
 
 import "rxjs/add/operator/map";
 
-
 import { ApplicationVM } from "./ApplicationVM";
+
+declare var jQuery: any;
+
 
 @Component({
     selector: "my-app",
@@ -16,7 +20,7 @@ import { ApplicationVM } from "./ApplicationVM";
 })
 
 
-export class ApplyForm {
+export class ApplyForm implements AfterViewInit{
 
     ApplyForm: FormGroup;
 
@@ -53,6 +57,18 @@ export class ApplyForm {
         this.showConfirmation = false;
         this.showSuccess = false;
         this.loading = false;
+    }
+
+    
+    ngAfterViewInit() {
+         
+        jQuery('#amountSlider').slider({
+            formatter: function (value) {
+                return 'NOK: ' + value;
+            }
+        });
+        
+
     }
 
     onSubmit() {

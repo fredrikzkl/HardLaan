@@ -33,6 +33,13 @@ let ApplyForm = class ApplyForm {
         this.showSuccess = false;
         this.loading = false;
     }
+    ngAfterViewInit() {
+        jQuery('#amountSlider').slider({
+            formatter: function (value) {
+                return 'NOK: ' + value;
+            }
+        });
+    }
     onSubmit() {
         this.tempID = this.ApplyForm.value.userid;
         this.checkIfCustomerExist(this.tempID);

@@ -11,7 +11,7 @@
     <div class="call-to-action">
         <form [formGroup]="ApplyForm" (ngSubmit)="onSubmit()">
 
-            <h4>Personlige Opplysninger</h4>
+            <h4 id="testface">Personlige Opplysninger</h4>
             <div class="form-group">
                 <label for="userIdInput">Personnummer</label>
                 <div class="inner-addon right-addon">
@@ -70,6 +70,9 @@
             </div>
 
 
+            <input id="amountSider" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14" />
+           
+
 
             <div class="form-group">
                 <button type="submit" [disabled]="!ApplyForm.valid" class="btn btn-primary regular-btn" >Neste</button>
@@ -96,3 +99,8 @@
     <button class="btn btn-default regular-btn" (click)="addApplication()">Send Søknad</button>
         
 </div>
+
+
+<script type="text/javascript">
+  
+</script>
