@@ -49,10 +49,10 @@
             <h4>Låneinformasjon</h4>
 
             
-           
+            <div class="form-group">
                 <p>Lånebeløp</p>
-                <input id="amount-slider" data-slider-id='ex1Slider' type="number" data-slider-min="5000" data-slider-max="100000" data-slider-step="5000" data-slider-value="50000"/>
-            
+                <input id="amount-slider" data-slider-id='ex1Slider' type="number" data-slider-min="5000" data-slider-max="100000" data-slider-step="5000" data-slider-value="50000" />
+            </div>
 
             
                 <p>Nedbetalingstid</p>
@@ -75,20 +75,88 @@
 
 <div class="col-lg-8 col-lg-offset-2 text-faded"  *ngIf="showConfirmation">
     <div id="summary">
-        <h3>Oppsummering</h3>
-        <p>Personnummer: {{tempID}}</p>
-        <p>Epost: {{tempEmail}}</p>
-        <p>Telefonnr: {{tempPhone}}</p>
-        <p>Beløp: {{tempAmount}}</p>
-        <p>Nedbetalingstid: {{tempMonths}} måneder</p>
-        <p>Rente: 0.07%</p>
-        <p>Måntlig Betaling: {{tempPay}} NOK</p>
+        <h3>Oppsumering</h3>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Personnummer</th>
+                    <td>{{tempID}}</td>
+                </tr>
+                <tr>
+                    <th>Epost</th>
+                    <td>{{tempEmail}}</td>
+               </tr>
+                <tr>
+                    <th>Telefonnr</th>
+                    <td>{{tempPhone}}</td>
+                </tr>
+                <tr>
+                    <th>Beløp</th>
+                    <td>{{tempAmount}}kr</td>
+                </tr>
+                <tr>
+                    <th>Nedbetalingstid</th>
+                    <td>{{tempMonths}} måneder</td>
+                </tr>
+                <tr>
+                    <th>Måntlig betaling</th>
+                    <td>{{tempPay}} kr/mnd</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
       
     <button class="btn btn-default regular-btn " (click)="backToForm()">Tilbake</button>
     <button class="btn btn-default regular-btn" (click)="addApplication()">Send Søknad</button>
         
 </div>
+
+<div class="col-lg-8 col-lg-offset-2 text-faded" *ngIf="showExistingApplication">
+    <div id="summary">
+        <h3><i class="glyphicon glyphicon-exclamation-sign"></i> Søknad Eksisterer</h3>
+        <p>En søknad ligger inne allerede for denne kunden. Du kan enten erstatte den eller beholde den gamle</p>
+        <p>Gammle søknaded:</p>
+        <table class="table">
+            
+            <tbody *ngFor="let a of existingApp" >
+                <tr>
+                    <th>Personnummer</th>
+                    <td>{{a.userid}}</td>
+                </tr>
+                <tr>
+                    <th>Epost</th>
+                    <td>{{a.email}}</td>
+                </tr>
+                <tr>
+                    <th>Telefonnr</th>
+                    <td>{{a.phone}}</td>
+                </tr>
+                <tr>
+                    <th>Beløp</th>
+                    <td>{{a.amount}}kr</td>
+                </tr>
+                <tr>
+                    <th>Nedbetalingstid</th>
+                    <td>{{a.months}} mnd</td>
+                </tr>
+                <tr>
+                    <th>Måntlig betaling</th>
+                    <td>{{a.pay}} kr/mnd</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-default regular-btn " (click)="backToForm()">Avbryt</button>
+    <button class="btn btn-default regular-btn" (click)="addApplication()">Erstatt</button>
+
+</div>
+
+
+
+
+
+
 
 
 <script type="text/javascript">

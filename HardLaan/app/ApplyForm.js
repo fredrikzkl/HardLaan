@@ -29,21 +29,13 @@ let ApplyForm = class ApplyForm {
         this.showForm = true;
         this.showConfirmation = false;
         this.showSuccess = false;
+        this.showExistingApplication = false;
         this.loading = false;
         this.tempAmount = 0;
+        this.initSliders();
     }
     ngAfterViewInit() {
-        jQuery('#amount-slider').slider({
-            formatter: function (value) {
-                return 'NOK: ' + value;
-            }
-        });
-        jQuery('#month-slider').slider({
-            formatter: function (value) {
-                return 'Måneder: ' + value;
-            }
-        });
-        // = $('#amount-slider').data("slider-value");
+        this.initSliders();
         var amount = 0;
         jQuery("#amount-slider").on("slide", function (slideEvt) {
             jQuery('#testface').text(slideEvt.value);
@@ -67,6 +59,19 @@ let ApplyForm = class ApplyForm {
             $('#borrow-info').text(" kr/mnd");
         }
     }
+    initSliders() {
+        jQuery('#amount-slider').slider('refresh');
+        jQuery('#amount-slider').slider({
+            formatter: function (value) {
+                return 'NOK: ' + value;
+            }
+        });
+        jQuery('#month-slider').slider({
+            formatter: function (value) {
+                return 'Måneder: ' + value;
+            }
+        });
+    }
     onSubmit() {
         this.tempEmail = this.ApplyForm.value.email;
         this.tempPhone = this.ApplyForm.value.phone;
@@ -75,13 +80,6 @@ let ApplyForm = class ApplyForm {
         ;
         this.tempID = this.ApplyForm.value.userid;
         this.checkIfCustomerExist(this.tempID);
-        if (this.userExist = true) {
-            this.showConfirmation = true;
-            this.showForm = false;
-        }
-        else {
-            alert("Brukeren finnes allerede");
-        }
         this.calculateRepayment();
     }
     calculateRepayment() {
@@ -92,22 +90,36 @@ let ApplyForm = class ApplyForm {
         this.tempPay = Math.round(y);
     }
     backToForm() {
+        this.initSliders();
         this.showForm = true;
         this.showConfirmation = false;
+        this.showExistingApplication = false;
     }
     checkIfCustomerExist(id) {
-        this._http.get("api/application/" + id)
+        var temp = id;
+        this._http.get("api/application/")
             .map(returData => {
             let JsonData = returData.json();
             return JsonData;
-        }).subscribe(JsonData => {
-            if (JsonData == null) {
-                this.userExist = false;
+        })
+            .subscribe(JsonData => {
+            this.allApplications = [];
+            if (JsonData) {
+                for (let a of JsonData) {
+                    if (a.userid == temp) {
+                        this.existingApp = [];
+                        this.existingApp.push(a);
+                        this.showExistingApplication = true;
+                        this.showForm = false;
+                        return;
+                    }
+                }
+                //om ikke finnes, confimration page
+                this.showConfirmation = true;
+                this.showForm = false;
             }
-            else {
-                this.userExist = true;
-            }
-        }, error => alert(error), () => console.error("ferdig get"));
+            ;
+        }, error => alert(error), () => console.log("Ferdig med å hente alle søknader"));
     }
     addApplication() {
         var newApp = new ApplicationVM_1.ApplicationVM();

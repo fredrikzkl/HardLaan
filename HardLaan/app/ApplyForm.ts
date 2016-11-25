@@ -27,8 +27,9 @@ export class ApplyForm implements AfterViewInit{
     showForm: boolean;
     showConfirmation: boolean;
     showSuccess: boolean;
+    showExistingApplication: boolean;
     loading: boolean;
-    userExist: boolean;
+    userExist: string;
 
     monthChoices: number[];
 
@@ -39,6 +40,8 @@ export class ApplyForm implements AfterViewInit{
     tempMonths: number;
 
     tempPay: number;
+    allApplications: Array<ApplicationVM>
+    existingApp: Array<ApplicationVM>;
 
     constructor(private _http: Http, private fb: FormBuilder) {
         this.ApplyForm = fb.group({
@@ -54,28 +57,16 @@ export class ApplyForm implements AfterViewInit{
         this.showForm = true;
         this.showConfirmation = false;
         this.showSuccess = false;
+        this.showExistingApplication = false;
         this.loading = false;
         this.tempAmount = 0;
-
-        
+        this.initSliders();
     }
 
     
     ngAfterViewInit() {
          
-        jQuery('#amount-slider').slider({
-            formatter: function (value) {
-                return 'NOK: ' + value;
-            }
-        });
-
-        jQuery('#month-slider').slider({
-            formatter: function (value) {
-                return 'Måneder: ' + value;
-            }
-        });
-
-        // = $('#amount-slider').data("slider-value");
+        this.initSliders();
 
         var amount = 0;
         jQuery("#amount-slider").on("slide", function (slideEvt) {
@@ -105,6 +96,21 @@ export class ApplyForm implements AfterViewInit{
       
     }
 
+    initSliders() {
+        jQuery('#amount-slider').slider('refresh');
+        jQuery('#amount-slider').slider({
+            formatter: function (value) {
+                return 'NOK: ' + value;
+            }
+        });
+
+        jQuery('#month-slider').slider({
+            formatter: function (value) {
+                return 'Måneder: ' + value;
+            }
+        });
+    }
+
     onSubmit() {
 
         this.tempEmail = this.ApplyForm.value.email;
@@ -114,17 +120,8 @@ export class ApplyForm implements AfterViewInit{
 
         this.tempID = this.ApplyForm.value.userid;
 
-        this.checkIfCustomerExist(this.tempID);
-
-        if (this.userExist = true) {
-            this.showConfirmation = true;
-            this.showForm = false;
-        } else {
-            alert("Brukeren finnes allerede");
-        }
+        this.checkIfCustomerExist(this.tempID)
        
-
-
      
         this.calculateRepayment();
         
@@ -140,28 +137,48 @@ export class ApplyForm implements AfterViewInit{
 
    
 
-    backToForm(){
+    backToForm() {
+        this.initSliders();
+
         this.showForm = true;
         this.showConfirmation = false;
+        this.showExistingApplication = false;
     }
 
     checkIfCustomerExist(id: string) {
-        this._http.get("api/application/" + id)
+        var temp = id;
+        this._http.get("api/application/")
             .map(returData => {
                 let JsonData = returData.json();
                 return JsonData;
-            }).subscribe(
+            })
+            .subscribe(
             JsonData => {
-                if (JsonData == null) {
-                    this.userExist = false;
-                } else {
-                    this.userExist = true;
-                }
+                this.allApplications = [];
+                if (JsonData) {
+                    for (let a of JsonData) {
+                        if (a.userid == temp) {
+                            this.existingApp = [];
+                            this.existingApp.push(a);
+
+                            this.showExistingApplication = true;
+                            this.showForm = false;
+                            return;
+                        }
+                    }
+                    //om ikke finnes, confimration page
+                    this.showConfirmation = true;
+                    this.showForm = false;
+                };
             },
             error => alert(error),
-            () => console.error("ferdig get")
+            () => console.log("Ferdig med å hente alle søknader")
         );
+
+        
     }
+
+   
 
     addApplication() {
         var newApp = new ApplicationVM();
