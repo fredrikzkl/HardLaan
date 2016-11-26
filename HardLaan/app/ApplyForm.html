@@ -4,7 +4,15 @@
 </div>
 
 <div *ngIf="showSuccess">
-    <h4>Succsessio</h4>
+    <h2><i class="glyphicon glyphicon-ok"></i> Søknad levert!</h2>
+    <p>Takk for din henvendelse, vi vil kontakte deg så snart søknaden er behandlet</p>
+    <button class="btn btn-default regular-btn " (click)="refresh()">Tilbake</button>
+</div>
+
+<div *ngIf="showChangeSuccess">
+    <h2><i class="glyphicon glyphicon-ok"></i> Søknad Endret</h2>
+    <p>Din søknad ble endret! Vi vil kontakte deg snarest.</p>
+    <button class="btn btn-default regular-btn " (click)="refresh()">Tilbake</button>
 </div>
 
 <div class="col-lg-8 col-lg-offset-2 text-center" *ngIf="showForm" >
@@ -148,7 +156,7 @@
     </div>
 
     <button class="btn btn-default regular-btn " (click)="backToForm()">Avbryt</button>
-    <button class="btn btn-default regular-btn" (click)="addApplication()">Erstatt</button>
+    <button class="btn btn-default regular-btn" (click)="editApplication()">Erstatt</button>
 
 </div>
 

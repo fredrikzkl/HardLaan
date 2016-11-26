@@ -70,5 +70,34 @@ namespace HardLaan
              var y = (r * G) / (1 - Math.Pow(1 + r, -n));
              return Math.Round(y,2);            
         }
+
+        public bool editApplication(string id, application inputApp)
+        {
+            //finner gammle application
+            Application temp = db.Applications.FirstOrDefault(k => k.userid == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            // endrer verdier
+            temp.email = inputApp.email;
+            temp.phone = inputApp.phone;
+            temp.amount = inputApp.amount;
+            temp.months = inputApp.months;
+            temp.montlypay = inputApp.pay;
+
+            
+            try
+            {
+                // lagre kunden
+                db.SaveChanges();
+            }
+            catch (Exception feil)
+            {
+                Console.Write(feil);
+                return false;
+            }
+            return true;
+        }
     }
 }

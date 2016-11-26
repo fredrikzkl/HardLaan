@@ -72,5 +72,27 @@ namespace HardLaan.Controllers
         }
 
 
+        public HttpResponseMessage Put(string id, [FromBody]application inputApp)
+        {
+            if (ModelState.IsValid)
+            {
+                bool OK = db.editApplication(id, inputApp);
+                if (OK)
+                {
+                    return new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+            }
+            return new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                Content = new StringContent("Kunne ikke endre søknaden, en feil oppsto")
+            };
+
+        }
+
+
     }
 }

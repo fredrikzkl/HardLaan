@@ -28,6 +28,8 @@ export class ApplyForm implements AfterViewInit{
     showConfirmation: boolean;
     showSuccess: boolean;
     showExistingApplication: boolean;
+    showChangeSuccess: boolean;
+
     loading: boolean;
     userExist: string;
 
@@ -178,8 +180,6 @@ export class ApplyForm implements AfterViewInit{
         
     }
 
-   
-
     addApplication() {
         var newApp = new ApplicationVM();
 
@@ -209,5 +209,35 @@ export class ApplyForm implements AfterViewInit{
             () => console.log("ferdig post")
         );
 
+    }
+
+    editApplication() {
+         var editApp = new ApplicationVM();
+
+         editApp.userid = this.tempID;
+         editApp.email = this.tempEmail;
+         editApp.phone = this.tempPhone;
+         editApp.amount = this.tempAmount;
+         editApp.months = this.tempMonths;
+         editApp.pay = this.tempPay;
+
+         var body: string = JSON.stringify(editApp);
+         var headers = new Headers({ "Content-Type": "application/json" });
+
+         this._http.put("api/application/" + this.tempID, body, { headers: headers })
+             .map(returData => returData.toString())
+             .subscribe(
+             retur => {
+                 this.showChangeSuccess = true;
+                 this.showExistingApplication = false;
+             },
+             error => alert(error),
+             () => console.log("ferdig post-api/kunde")
+         );
+
+    }
+
+    refresh() {
+        location.reload();
     }
 }

@@ -141,6 +141,26 @@ let ApplyForm = class ApplyForm {
             this.showSuccess = true;
         }, error => alert(error), () => console.log("ferdig post"));
     }
+    editApplication() {
+        var editApp = new ApplicationVM_1.ApplicationVM();
+        editApp.userid = this.tempID;
+        editApp.email = this.tempEmail;
+        editApp.phone = this.tempPhone;
+        editApp.amount = this.tempAmount;
+        editApp.months = this.tempMonths;
+        editApp.pay = this.tempPay;
+        var body = JSON.stringify(editApp);
+        var headers = new http_2.Headers({ "Content-Type": "application/json" });
+        this._http.put("api/application/" + this.tempID, body, { headers: headers })
+            .map(returData => returData.toString())
+            .subscribe(retur => {
+            this.showChangeSuccess = true;
+            this.showExistingApplication = false;
+        }, error => alert(error), () => console.log("ferdig post-api/kunde"));
+    }
+    refresh() {
+        location.reload();
+    }
 };
 ApplyForm = __decorate([
     core_1.Component({
