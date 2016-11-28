@@ -31,6 +31,7 @@ export class ApplyForm implements AfterViewInit{
     showChangeSuccess: boolean;
 
     loading: boolean;
+    fetchingUsers : boolean; //Loading gifen etter trykker "neste"
     userExist: string;
 
     monthChoices: number[];
@@ -61,8 +62,9 @@ export class ApplyForm implements AfterViewInit{
         this.showSuccess = false;
         this.showExistingApplication = false;
         this.loading = false;
-        this.tempAmount = 0;
+
         this.initSliders();
+
     }
 
     
@@ -70,19 +72,23 @@ export class ApplyForm implements AfterViewInit{
          
         this.initSliders();
 
-        var amount = 0;
+        var amount = jQuery('#amount-slider').val();
         jQuery("#amount-slider").on("slide", function (slideEvt) {
             jQuery('#testface').text(slideEvt.value);
             amount = slideEvt.value;
+            jQuery('#amount-display').text(amount + "kr");
             calculate();
         });
 
-        var month = 0;
+        var month = jQuery('#month-slider').val();
         jQuery("#month-slider").on("slide", function (slideEvt) {
             jQuery('#testface').text(slideEvt.value);
             month = slideEvt.value;
+            jQuery('#time-display').text(month + " måneder");
             calculate();
         });
+
+        calculate();
 
 
         function calculate() {
@@ -93,28 +99,32 @@ export class ApplyForm implements AfterViewInit{
             var y = (r * G) / (1 - Math.pow(1 + r, -n));
             jQuery('#borrowcalculator').text(Math.round(y));
             $('#borrow-info').text(" kr/mnd");
-
         }
       
     }
 
     initSliders() {
-        jQuery('#amount-slider').slider('refresh');
+
+
         jQuery('#amount-slider').slider({
             formatter: function (value) {
-                return 'NOK: ' + value;
+                return '' + value + 'kr';
             }
         });
 
         jQuery('#month-slider').slider({
             formatter: function (value) {
-                return 'Måneder: ' + value;
+                return '' + value + ' måneder';
             }
         });
+
+        jQuery('#amount-display').text(jQuery('#amount-slider').val() + 'kr');
+        jQuery('#time-display').text(jQuery('#month-slider').val() + ' måneder');
+
     }
 
     onSubmit() {
-
+        this.fetchingUsers = true;
         this.tempEmail = this.ApplyForm.value.email;
         this.tempPhone = this.ApplyForm.value.phone;
         this.tempAmount = jQuery('#amount-slider').val();
@@ -126,6 +136,7 @@ export class ApplyForm implements AfterViewInit{
        
      
         this.calculateRepayment();
+        
         
     }
 
@@ -140,7 +151,7 @@ export class ApplyForm implements AfterViewInit{
    
 
     backToForm() {
-        this.initSliders();
+        jQuery('#amount-slider').slider('refresh');
 
         this.showForm = true;
         this.showConfirmation = false;
@@ -148,6 +159,7 @@ export class ApplyForm implements AfterViewInit{
     }
 
     checkIfCustomerExist(id: string) {
+       
         var temp = id;
         this._http.get("api/application/")
             .map(returData => {
@@ -163,6 +175,18 @@ export class ApplyForm implements AfterViewInit{
                             this.existingApp = [];
                             this.existingApp.push(a);
 
+
+                            var newApp = new ApplicationVM();
+                            newApp.userid = this.tempID;
+                            newApp.email = this.tempEmail;
+                            newApp.phone = this.tempPhone;
+                            newApp.amount = this.tempAmount;
+                            newApp.months = this.tempMonths;
+                            newApp.pay = this.tempPay;
+
+                            this.existingApp.push(newApp);
+
+                            this.fetchingUsers = false;
                             this.showExistingApplication = true;
                             this.showForm = false;
                             return;
@@ -171,10 +195,11 @@ export class ApplyForm implements AfterViewInit{
                     //om ikke finnes, confimration page
                     this.showConfirmation = true;
                     this.showForm = false;
+                    this.fetchingUsers = false;
                 };
             },
             error => alert(error),
-            () => console.log("Ferdig med å hente alle søknader")
+            () => console.log("Sjekket om personnr finnes i db")
         );
 
         
@@ -223,13 +248,14 @@ export class ApplyForm implements AfterViewInit{
 
          var body: string = JSON.stringify(editApp);
          var headers = new Headers({ "Content-Type": "application/json" });
-
+         this.showExistingApplication = false;
+         this.loading = true;
          this._http.put("api/application/" + this.tempID, body, { headers: headers })
              .map(returData => returData.toString())
              .subscribe(
              retur => {
                  this.showChangeSuccess = true;
-                 this.showExistingApplication = false;
+                 this.loading = false;
              },
              error => alert(error),
              () => console.log("ferdig post-api/kunde")

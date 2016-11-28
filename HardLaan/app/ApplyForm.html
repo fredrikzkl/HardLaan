@@ -1,4 +1,7 @@
-﻿<div class="loading" *ngIf="loading" >
+﻿
+
+
+<div class="loading" *ngIf="loading" >
     <img src="/Content/Image/spin.svg" />
 
 </div>
@@ -19,12 +22,39 @@
     <div class="call-to-action">
         <form [formGroup]="ApplyForm" (ngSubmit)="onSubmit()">
 
+            <h4>Låneinformasjon</h4>
+
+            <div class="form-group">
+                <p>Lånebeløp</p>
+                <input id="amount-slider" data-slider-id='ex1Slider' type="number" data-slider-min="5000" data-slider-max="100000" data-slider-step="5000" data-slider-value="50000" />
+            </div>
+
+
+            <p>Nedbetalingstid</p>
+            <input id="month-slider" data-slider-id='ex1Slider' type="number" data-slider-min="6" data-slider-max="36" data-slider-step="1" data-slider-value="18" />
+
+            <div class="col-md-4">
+                <h4>Beløp</h4>
+                <p><span id="amount-display"></span></p>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Tid</h4>
+                <p><span id="time-display"></span></p>
+            </div>
+
+            <div class="col-md-4">
+                <h4>Lånekalkulator</h4>
+                <p><span id="borrowcalculator"></span><span id="borrow-info">TBA</span></p>
+            </div>
+
+            <hr class="light">
             <h4>Personlige Opplysninger</h4>
             <div class="form-group">
                 <label for="userIdInput">Personnummer</label>
                 <div class="inner-addon right-addon">
                     <span [hidden]="!ApplyForm.controls.userid.valid"><i class="fa fa-check" ></i></span>
-                    <input id="userIdInput" class="form-control" required formControlName="userid"  />
+                    <input id="userIdInput" class="form-control" aria-describedby="basic-addon1" required formControlName="userid"  />
                 </div>
                 <p class="alert alert-info" [hidden]="ApplyForm.controls.userid.valid || (ApplyForm.controls.userid.pristine && !submitted)">
                     Personnummer må være 11 siffer.
@@ -54,27 +84,20 @@
             </div>
 
 
-            <h4>Låneinformasjon</h4>
-
-            
-            <div class="form-group">
-                <p>Lånebeløp</p>
-                <input id="amount-slider" data-slider-id='ex1Slider' type="number" data-slider-min="5000" data-slider-max="100000" data-slider-step="5000" data-slider-value="50000" />
-            </div>
-
-            
-                <p>Nedbetalingstid</p>
-                <input id="month-slider"  data-slider-id='ex1Slider' type="number" data-slider-min="6" data-slider-max="36" data-slider-step="1" data-slider-value="18" />
-           
-
-            <h4>Lånekalkulator</h4>
-            <p ><span id="borrowcalculator"></span><span id="borrow-info"></span></p>
-           
-
 
             <div class="form-group">
-                <button type="submit" [disabled]="!ApplyForm.valid" class="btn btn-primary regular-btn" >Neste</button>
+                <div>
+                    <button *ngIf="!fetchingUsers" type="submit" [disabled]="!ApplyForm.valid" class="btn btn-primary regular-btn">Neste</button>
+                </div>
+                <div *ngIf="fetchingUsers">
+                    <img src="/Content/Image/spin.svg" />
+                </div>
             </div>
+
+
+
+
+           
 
         </form>
     </div>
@@ -123,33 +146,36 @@
     <div id="summary">
         <h3><i class="glyphicon glyphicon-exclamation-sign"></i> Søknad Eksisterer</h3>
         <p>En søknad ligger inne allerede for denne kunden. Du kan enten erstatte den eller beholde den gamle</p>
-        <p>Gammle søknaded:</p>
         <table class="table">
-            
-            <tbody *ngFor="let a of existingApp" >
+            <tbody  >
+                <tr>
+                    <th></th>
+                    <th>Gamle</th>
+                    <th>Nye</th>
+                </tr>
                 <tr>
                     <th>Personnummer</th>
-                    <td>{{a.userid}}</td>
+                    <td *ngFor="let a of existingApp" >{{a.userid}}</td>
                 </tr>
                 <tr>
                     <th>Epost</th>
-                    <td>{{a.email}}</td>
+                    <td *ngFor="let a of existingApp">{{a.email}}</td>
                 </tr>
                 <tr>
                     <th>Telefonnr</th>
-                    <td>{{a.phone}}</td>
+                    <td *ngFor="let a of existingApp">{{a.phone}}</td>
                 </tr>
                 <tr>
                     <th>Beløp</th>
-                    <td>{{a.amount}}kr</td>
+                    <td *ngFor="let a of existingApp">{{a.amount}}kr</td>
                 </tr>
                 <tr>
                     <th>Nedbetalingstid</th>
-                    <td>{{a.months}} mnd</td>
+                    <td *ngFor="let a of existingApp">{{a.months}} mnd</td>
                 </tr>
                 <tr>
                     <th>Måntlig betaling</th>
-                    <td>{{a.pay}} kr/mnd</td>
+                    <td *ngFor="let a of existingApp">{{a.pay}} kr/mnd</td>
                 </tr>
             </tbody>
         </table>
